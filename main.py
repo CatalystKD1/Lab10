@@ -28,7 +28,7 @@ def menu():
   print("4. Withdraw money.")
   print("5. Exit.")
   while(True):
-    temp = getInt("Write which choice you would like.")
+    temp = getInt("Write which choice you would like: ")
     if (temp == 1):
       createTXT()
     elif(temp == 5):
@@ -41,18 +41,44 @@ def menu():
       
 def ided(choice):
   temp = getInt("Write your ID: ")
-  id = temp + ".txt"
-  #if(os.path.exists(id)):
+  id = str(temp) + ".txt"
+  if(os.path.exists(id)):
+    if(choice == 2):
+      openTXT(id)
+    elif(choice == 3):
+      deposite(id)
+    elif(choice == 4):
+      withdraw(id)
+    
 
 def deposite(id):
-  print(1)
+  balance = 0
+  with open(id) as f:
+    money = int(f.read())
+    print(f"Your balance is currently ${money}.")
+    temp = getInt("How much would you like to deposite? ")
+    balance = money + temp
+  print(balance)
+  print(f"Your new balance is : ${balance}.")
+  with open(id, "w") as f:
+    f.write(str(balance))
 
-def openTXT():
-  try:
-    with open('docs/readme.txt', 'w') as f:
-        f.write('Create a new text file!')
-  except FileNotFoundError:
-    print("The 'docs' directory does not exist")
+def withdraw(id):
+  balance = 0
+  with open(id) as f:
+    money = int(f.read())
+    print(f"Your balance is currently ${money}.")
+    temp = getInt("How much would you like to withdraw? ")
+    balance = money - temp
+  print(balance)
+  print(f"Your new balance is : ${balance}.")
+  with open(id, "w") as f:
+    f.write(str(balance))
+
+def openTXT(id):
+  with open(id) as f:
+    h = f.read()
+    print(f"Your balance is ${h}")
 
 def createTXT():
   while(True):
@@ -62,15 +88,16 @@ def createTXT():
       print("this account is already created with us. Sorry pal!")
     else:
       create(id)
+      break
 
-def create():
-  with open(id) as f:
+def create(id):
+  with open(id, "w") as f:
     f.write("0")
   with open(id) as f:
     h = f.read()
     print(f"Your account has been created! Your starter balance is ${h}.")
   while(True):
-    a = getStr("Would you like to deposite some of your preciouse cash? Y/N")
+    a = getStr("Would you like to deposite some of your preciouse cash? Y/N; ")
     if(a == "y"):
       deposite(id)
       break
@@ -80,4 +107,4 @@ def create():
     else:
       print("You must make a decision you fooool!")
   
-createTXT()
+menu()
