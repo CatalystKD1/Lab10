@@ -21,8 +21,28 @@ def getStr(message):
       break
   return temp
 
-def ided():
-  getInt("Write your ID/.")
+def menu():
+  print("1. Create a account")
+  print("2. View account.")
+  print("3. Deposite money.")
+  print("4. Withdraw money.")
+  print("5. Exit.")
+  while(True):
+    temp = getInt("Write which choice you would like.")
+    if (temp == 1):
+      createTXT()
+    elif(temp == 5):
+      print("Thank you for using our service.")
+      break
+    elif(temp == 2 or temp == 3 or temp == 4):
+      ided(temp)
+    else:
+      print("Give a real answer.")
+      
+def ided(choice):
+  temp = getInt("Write your ID: ")
+  id = temp + ".txt"
+  #if(os.path.exists(id)):
 
 def deposite(id):
   print(1)
@@ -35,12 +55,13 @@ def openTXT():
     print("The 'docs' directory does not exist")
 
 def createTXT():
-  temp = getInt("Write your ID: ")
-  id = str(temp) +".txt"
-  if(os.path.exists(id)):
-    print("this account is already created with us. Sorry pal!")
-  else:
-    create(id)
+  while(True):
+    temp = getInt("Write your ID: ")
+    id = str(temp) +".txt"
+    if(os.path.exists(id)):
+      print("this account is already created with us. Sorry pal!")
+    else:
+      create(id)
 
 def create():
   with open(id) as f:
