@@ -22,12 +22,12 @@ def getStr(message):
   return temp
 
 def menu():
+  print("1. Create a account")
+  print("2. View account.")
+  print("3. Deposite money.")
+  print("4. Withdraw money.")
+  print("5. Exit.")
   while(True):
-    print("1. Create a account")
-    print("2. View account.")
-    print("3. Deposite money.")
-    print("4. Withdraw money.")
-    print("5. Exit.")
     temp = getInt("Write which choice you would like: ")
     if (temp == 1):
       createTXT()
@@ -38,7 +38,6 @@ def menu():
       ided(temp)
     else:
       print("Give a real answer.")
-    print()
       
 def ided(choice):
   temp = getInt("Write your ID: ")
